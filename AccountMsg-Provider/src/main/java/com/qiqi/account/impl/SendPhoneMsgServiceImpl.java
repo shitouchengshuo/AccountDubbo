@@ -48,8 +48,8 @@ public class SendPhoneMsgServiceImpl  {
 
         //状态报告
         String report = "true";
-        String accountKey = "N3616156";
-        String pswdKey = "teGhYCNgW2fa9d";
+        String accountKey = "";
+        String pswdKey = "";
         //String accountKey = PropertiesUtil.getConfigProp().getProperty("account");
         //String pswdKey = PropertiesUtil.getConfigProp().getProperty("pswd");
         SmsSendRequest smsSingleRequest = new SmsSendRequest(accountKey, pswdKey, msg, phoneNumber, report);
