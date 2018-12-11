@@ -7,14 +7,16 @@ import com.qiqi.account.model.chuanglan.request.SmsSendRequest;
 import com.qiqi.account.model.chuanglan.response.SmsSendResponse;
 import com.qiqi.account.utils.ChuangLanSmsUtil;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
+
 import java.util.*;
 
 
 /**
  * Created by ZhaoQiqi on 2018/12/6.
  */
-//implements SendPhoneMsgService
-public class SendPhoneMsgServiceImpl  {
+@Service("sendPhoneMsgService")
+public class SendPhoneMsgServiceImpl implements SendPhoneMsgService {
 
     public static final Logger logger = Logger.getLogger(SendPhoneMsgServiceImpl.class);
 
@@ -23,7 +25,7 @@ public class SendPhoneMsgServiceImpl  {
      * @param phoneNumber
      * @param verificationCode
      * @param expiresecond
-     * @return 格式："{\"errorCode\":" + xx + "}"
+     * @return 格式："{\"error\":" + xx + "}"
      */
     public String sendPhoneMsg(String phoneNumber, String verificationCode, String expiresecond) {
 //        String phoneNumber = "13167003258";
@@ -48,8 +50,8 @@ public class SendPhoneMsgServiceImpl  {
 
         //状态报告
         String report = "true";
-        String accountKey = "";
-        String pswdKey = "";
+        String accountKey = "***";
+        String pswdKey = "***";
         //String accountKey = PropertiesUtil.getConfigProp().getProperty("account");
         //String pswdKey = PropertiesUtil.getConfigProp().getProperty("pswd");
         SmsSendRequest smsSingleRequest = new SmsSendRequest(accountKey, pswdKey, msg, phoneNumber, report);
@@ -68,36 +70,36 @@ public class SendPhoneMsgServiceImpl  {
         }
         //创蓝发送短信的状态码
         String sendSatues = smsSingleResponse.getCode();
-        //方法返回值 格式："{\"errorCode\":" + xx + "}"
+        //方法返回值 格式："{\"error\":" + xx + "}"
         String result = "";
         if ("0".equals(sendSatues)){
             //发送成功
             logger.info("向用户手机：" + phoneNumber + "发送验证码：" + verificationCode+"成功！");
-            result = "{\"errorCode\":" + 0 + "}";
+            result = "{\"error\":" + 0 + "}";
         } else if ("103".equals(sendSatues)) {
             //提交过快（提交速度超过流速限制）
             //必要时要保存错误信息到数据库，这里先不实现
             logger.warn("使用创蓝发送短信的状态"+smsSingleResponse.getErrorMsg());
-            result = "{\"errorCode\":" + 103 + "}";
+            result = "{\"error\":" + 103 + "}";
         } else if ("104".equals(sendSatues)) {
             //系统忙
             logger.error("使用创蓝发送短信的状态"+smsSingleResponse.getErrorMsg());
-            result = "{\"errorCode\":" + 104 + "}";
+            result = "{\"error\":" + 104 + "}";
         } else if ("107".equals(sendSatues)) {
             //包含错误的手机号码
             logger.error("使用创蓝发送短信的状态"+smsSingleResponse.getErrorMsg());
-            result = "{\"errorCode\":" + 107 + "}";
+            result = "{\"error\":" + 107 + "}";
         }else if ("109".equals(sendSatues)) {
             //无发送额度 109
             logger.error("使用创蓝发送短信的状态"+smsSingleResponse.getErrorMsg());
-            result = "{\"errorCode\":" + 109 + "}";
+            result = "{\"error\":" + 109 + "}";
         } else if ("110".equals(sendSatues)) {
             //不在发送时间内 110
             logger.error("使用创蓝发送短信的状态"+smsSingleResponse.getErrorMsg());
-            result = "{\"errorCode\":" + 110 + "}";
+            result = "{\"error\":" + 110 + "}";
         }else {
             logger.error("使用创蓝发送短信的状态"+smsSingleResponse.getErrorMsg());
-            result = "{\"errorCode\":" + result + "}";
+            result = "{\"error\":" + result + "}";
         }
         return result;
 

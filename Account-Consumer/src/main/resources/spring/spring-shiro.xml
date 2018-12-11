@@ -78,6 +78,8 @@
 				/test=anon
 				/logout = anon
 				/ui/checkLogin = anon
+				/ui/registerPage = anon
+				/ui/**=anon
 				<!-- 过滤静态资源 如js、css、图片-->
 				/public/**=anon
 				/js/**=anon

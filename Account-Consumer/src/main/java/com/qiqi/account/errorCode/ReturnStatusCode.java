@@ -102,9 +102,14 @@ public enum ReturnStatusCode {
   
     public void setErrorInfo(String errorInfo) {  
         this.errorInfo = errorInfo;  
-    }  
-    private ReturnStatusCode(String ErrorCode, String ErrorInfo)  
-    {  
+    }
+
+	/**
+	 * 构造函数
+	 * @param ErrorCode
+	 * @param ErrorInfo
+	 */
+	private ReturnStatusCode(String ErrorCode, String ErrorInfo){
         this.errorCode = ErrorCode;  
         this.errorInfo = ErrorInfo;  
     }  

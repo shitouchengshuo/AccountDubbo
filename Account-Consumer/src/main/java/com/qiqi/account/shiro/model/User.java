@@ -1,5 +1,6 @@
 package com.qiqi.account.shiro.model;
 
+
 import lombok.Data;
 
 /**

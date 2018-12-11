@@ -3,6 +3,7 @@
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/Account-Consumer" />
+    <file type="web" url="file://$PROJECT_DIR$/Account-Consumer1" />
     <file type="web" url="file://$PROJECT_DIR$/dubbo-api" />
   </component>
   <component name="MavenProjectsManager">

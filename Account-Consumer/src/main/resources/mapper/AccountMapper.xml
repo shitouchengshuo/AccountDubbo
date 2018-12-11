@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiqi.account.dao.AccountMapper">
+
+	<resultMap id="BaseResultMap" type="com.qiqi.account.model.TbAccount"></resultMap>
+	
+	<select id="getByUId" parameterType="int" resultType="com.qiqi.account.model.TbAccount">
+		select * from account f where f.`uid` = #{uid}
+	</select>
+	
+	<select id="getPhoneNumberByUId" parameterType="int" resultType="com.qiqi.account.model.TbAccount">
+		select phonenumber from account f where f.`uid` = #{uid}
+	</select>
+	
+	<select id="getByPhone" parameterType="java.lang.String" resultType="com.qiqi.account.model.TbAccount">
+		select * from account f where f.`phonenumber` = #{phonenumber}
+	</select>
+
+	<select id="getByMail" parameterType="java.lang.String" resultType="com.qiqi.account.model.TbAccount">
+		select * from account f where f.`emailaddress` = #{emailaddress}
+	</select>
+
+	<select id="getByAccountName" parameterType="java.lang.String" resultType="com.qiqi.account.model.TbAccount">
+		select * from account f where f.`accountname` = #{accountname}
+	</select>
+	
+	<insert id="saveOrUpdateByUId" parameterType="com.qiqi.account.model.TbAccount" useGeneratedKeys="true" keyProperty="uid">
+		<selectKey keyProperty="count" resultType="int" order="BEFORE">
+			select count(*) from account f where f.`uid` = #{uid}
+		</selectKey>
+		
+		<if test="count == 0">
+			insert into account(accountname, phonenumber, emailaddress, password, passsalt, roleId, account_status, register_source, createtime, updatetime, securityQA, access_token, refresh_token)
+			values(#{accountname}, #{phonenumber}, #{emailaddress}, #{password}, #{passsalt},#{roleId}, #{account_status}, #{register_source}, #{createtime}, #{updatetime}, #{securityQA}, #{access_token}, #{refresh_token})
+		</if>
+		
+		<if test="count == 1">
+			update account f set f.`accountname` = #{accountname}, f.`phonenumber` = #{phonenumber}, f.`emailaddress` = #{emailaddress},
+			f.`password` = #{password}, f.`passsalt` = #{passsalt},f.`roleId` = #{roleId}, f.`account_status` = #{account_status}, f.`register_source` = #{register_source},
+			f.`createtime` = #{createtime}, f.`updatetime` = #{updatetime}, f.`securityQA` =#{securityQA}, f.access_token =#{access_token}, f.refresh_token =#{refresh_token}
+            where f.`uid` = #{uid}
+		</if>
+	</insert>
+
+	<insert id="saveOrUpdateByPhone" parameterType="com.qiqi.account.model.TbAccount" useGeneratedKeys="true" keyProperty="uid">
+		<selectKey keyProperty="count" resultType="int" order="BEFORE">
+			select count(*) from account f where f.`phonenumber` = #{phonenumber}
+		</selectKey>
+		
+		<if test="count == 0">
+			insert into account(accountname, phonenumber, emailaddress, password, passsalt,roleId, account_status, register_source, createtime, updatetime, securityQA, access_token, refresh_token)
+			values(#{accountname}, #{phonenumber}, #{emailaddress}, #{password}, #{passsalt},#{roleId}, #{account_status}, #{register_source}, #{createtime}, #{updatetime}, #{securityQA}, #{access_token}, #{refresh_token})
+		</if>
+		
+		<if test="count == 1">
+			update account f set f.`accountname` = #{accountname}, f.`phonenumber` = #{phonenumber}, f.`emailaddress` = #{emailaddress},
+			f.`password` = #{password}, f.`passsalt` = #{passsalt},f.`roleId` = #{roleId}, f.`account_status` = #{account_status}, f.`register_source` = #{register_source},
+			f.`createtime` = #{createtime}, f.`updatetime` = #{updatetime}, f.`securityQA` =#{securityQA}, f.access_token =#{access_token}, f.refresh_token =#{refresh_token} where f.`phonenumber` = #{phonenumber}
+		</if>
+	</insert>
+
+	<insert id="saveOrUpdateByMail" parameterType="com.qiqi.account.model.TbAccount" useGeneratedKeys="true" keyProperty="uid">
+		<selectKey keyProperty="count" resultType="int" order="BEFORE">
+			select count(*) from account f where f.`emailaddress` = #{emailaddress}
+		</selectKey>
+		
+		<if test="count == 0">
+			insert into account(accountname, phonenumber, emailaddress, password, passsalt, roleId, account_status, register_source, createtime, updatetime, securityQA, access_token, refresh_token)
+			values(#{accountname}, #{phonenumber}, #{emailaddress}, #{password}, #{passsalt},#{roleId}, #{account_status}, #{register_source}, #{createtime}, #{updatetime}, #{securityQA}, #{access_token}, #{refresh_token})
+		</if>
+		
+		<if test="count == 1">
+			update account f set f.`accountname` = #{accountname}, f.`phonenumber` = #{phonenumber}, f.`emailaddress` = #{emailaddress},
+			f.`password` = #{password}, f.`passsalt` = #{passsalt},f.`roleId` = #{roleId}, f.`account_status` = #{account_status}, f.`register_source` = #{register_source},
+			f.`createtime` = #{createtime}, f.`updatetime` = #{updatetime}, f.`securityQA` =#{securityQA}, f.access_token =#{access_token}, f.refresh_token =#{refresh_token}
+            where f.`emailaddress` = #{emailaddress}
+		</if>
+	</insert>
+
+	<insert id="saveOrUpdateByAccountName" parameterType="com.qiqi.account.model.TbAccount" useGeneratedKeys="true" keyProperty="uid">
+		<selectKey keyProperty="count" resultType="int" order="BEFORE">
+			select count(*) from account f where f.`accountname` = #{accountname}
+		</selectKey>
+		
+		<if test="count == 0">
+			insert into account(accountname, phonenumber, emailaddress, password, passsalt, roleId, account_status, register_source, createtime, updatetime, securityQA, access_token, refresh_token)
+			values(#{accountname}, #{phonenumber}, #{emailaddress}, #{password},  #{passsalt}, #{roleId}, #{account_status}, #{register_source}, #{createtime}, #{updatetime}, #{securityQA}, #{access_token}, #{refresh_token})
+		</if>
+		
+		<if test="count == 1">
+			update account f set f.`accountname` = #{accountname}, f.`phonenumber` = #{phonenumber}, f.`emailaddress` = #{emailaddress},
+			f.`password` = #{password}, f.`passsalt` = #{passsalt}, f.`roleId` = #{roleId}, f.`account_status` = #{account_status}, f.`register_source` = #{register_source},
+			f.`createtime` = #{createtime}, f.`updatetime` = #{updatetime}, f.`securityQA` =#{securityQA} , f.access_token =#{access_token}, f.refresh_token =#{refresh_token}
+            where f.`accountname` = #{accountname}
+		</if>
+	</insert>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="uid">
+
+          insert into account(account_status, createtime, register_source) values(#{account_status}, #{createtime}, #{register_source})
+
+    </insert>
+    
+    <update id="updateUserTokenByUid" parameterType = "int">
+        	update account f set f.`access_token` = null, f.`refresh_token` = null where f.`uid` = #{uid}
+    </update>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
