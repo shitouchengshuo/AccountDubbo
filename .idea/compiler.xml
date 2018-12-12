@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Account-Consumer" />
-        <module name="Account-Consumer1" />
         <module name="AccountMsg-Provider" />
         <module name="dubbo-api" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Account-Consumer1" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>
