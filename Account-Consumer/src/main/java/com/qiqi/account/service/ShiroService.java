@@ -18,9 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 
-/**
- * Created by ZhaoQiqi on 2018/11/26.
- */
 @Service
 public class ShiroService {
 
@@ -261,6 +258,8 @@ public class ShiroService {
         String result = demoService.sendPhoneMsg("13167003258", "123456", "30");
         com.alibaba.fastjson.JSONObject json = JSON.parseObject(result);
     }
+
+
     /**
      测试
      @RequiresRoles({"admin"})  //表示当前Subject需要角色admin

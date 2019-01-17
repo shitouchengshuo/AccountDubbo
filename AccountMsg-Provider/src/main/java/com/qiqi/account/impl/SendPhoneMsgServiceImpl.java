@@ -11,10 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-
-/**
- * Created by ZhaoQiqi on 2018/12/6.
- */
 @Service("sendPhoneMsgService")
 public class SendPhoneMsgServiceImpl implements SendPhoneMsgService {
 
@@ -28,7 +24,7 @@ public class SendPhoneMsgServiceImpl implements SendPhoneMsgService {
      * @return 格式："{\"error\":" + xx + "}"
      */
     public String sendPhoneMsg(String phoneNumber, String verificationCode, String expiresecond) {
-//        String phoneNumber = "13167003258";
+//        String phoneNumber = "";
 //        String verificationCode = "123456";
 //        String expiresecond = "";
         logger.info("/verification传入的参数是：" + "phoneNumber=" + phoneNumber + ",verificationCode=" + verificationCode+",expiresecond="+expiresecond);
@@ -50,8 +46,8 @@ public class SendPhoneMsgServiceImpl implements SendPhoneMsgService {
 
         //状态报告
         String report = "true";
-        String accountKey = "***";
-        String pswdKey = "***";
+        String accountKey = "****";
+        String pswdKey = "*****";
         //String accountKey = PropertiesUtil.getConfigProp().getProperty("account");
         //String pswdKey = PropertiesUtil.getConfigProp().getProperty("pswd");
         SmsSendRequest smsSingleRequest = new SmsSendRequest(accountKey, pswdKey, msg, phoneNumber, report);
@@ -102,6 +98,8 @@ public class SendPhoneMsgServiceImpl implements SendPhoneMsgService {
             result = "{\"error\":" + result + "}";
         }
         return result;
+
+
 
     //限制每天发送短信的次数,在配置文件中定义，默认false
     /** 待实现
